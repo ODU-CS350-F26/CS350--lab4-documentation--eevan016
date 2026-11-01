@@ -15,8 +15,9 @@ java {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.0'
+    testImplementation 'org.hamcrest:hamcrest-library:3.0'
 }
 
 tasks.withType(Test) {
@@ -25,6 +26,15 @@ tasks.withType(Test) {
     testLogging {
         events "passed", "skipped", "failed"
         }
+}
+
+task reports (type: Copy){
+    dependsOn(['javadoc', 'build'])
+
+    from('src\\main\\html')
+    into('build\\reports')
+    from('build\\docs')
+    into('build\\reports')
 }
 
 application { //Allows  ./gradlew run --args=path-to-test-data
