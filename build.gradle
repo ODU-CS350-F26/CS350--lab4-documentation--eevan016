@@ -29,7 +29,7 @@ tasks.withType(Test) {
 }
 
 task reports (type: Copy){
-    dependsOn(['javadoc', 'build'])
+    dependsOn(['javadoc', 'build', 'test'])
 
     from('src\\main\\html')
     into('build\\reports')
@@ -40,7 +40,6 @@ task reports (type: Copy){
 def pagesDir = file("${project.rootDir}/build/website-temp").absolutePath
 
 task clearPages(type: Delete) {
-    System.out.println("Deleting: " + pagesDir)
     delete pagesDir
 }
 
