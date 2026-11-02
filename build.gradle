@@ -51,7 +51,7 @@ task workTreeAdd(type: Exec, dependsOn: ['clearPages']) {
 
 task workTreeCheckout(type: Exec, dependsOn: ['workTreeAdd']) {
     workingDir = pagesDir
-    commandLine = ['git', 'worktree', 'add', '-f', pagesDir, 'gh-pages']
+    commandLine = ['git', 'checkout', 'gh-pages']
 }
 
 task workTree(type: Exec, dependsOn: ['workTreeCheckout']) {
@@ -102,7 +102,7 @@ task deployReports (type: Exec, dependsOn: 'cleanWorkTree') {
     group = "Reporting"
     description 'Commit and push website changes to GitHub'
     workingDir = '.'
-    commandLine - ['git', 'workTree', 'prune']
+    commandLine = ['git', 'worktree', 'prune']
 }
 
 application { //Allows  ./gradlew run --args=path-to-test-data
