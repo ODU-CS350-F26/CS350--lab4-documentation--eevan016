@@ -59,22 +59,27 @@ task workTree(type: Exec, dependsOn: ['workTreeCheckout']) {
     commandLine = ['git', 'pull']
 }
 
-task copyJavaDocs (type: Copy, dependsOn: ['reports', 'workTree']) {
-    from 'build\\reports\\javaDoc'
+task copyReports(type: Copy, dependsOn: ['reports', 'workTree']) {
+    from 'build\\reports'
     into pagesDir
 }
 
-task copyUnitTests (type: Copy, dependsOn: ['reports', 'workTree']) {
-    from 'build\\reports\\javaDoc'
-    into pagesDir
-}
+//task copyJavaDocs (type: Copy, dependsOn: ['reports', 'workTree']) {
+//    from 'build\\reports\\javaDoc'
+//    into pagesDir
+//}
+//
+//task copyUnitTests (type: Copy, dependsOn: ['reports', 'workTree']) {
+//    from 'build\\reports\\javaDoc'
+//    into pagesDir
+//}
 
 task copyReadMe (type: Copy, dependsOn: ['workTree']) {
     from '..\\README.md'
     into pagesDir
 }
 
-task copyWebsite (type: Copy, dependsOn: ['copyJavaDocs', 'copyReadMe', 'copyUnitTests']) {
+task copyWebsite (type: Copy, dependsOn: ['copyReports', 'copyReadMe'/*, 'copyUnitTests'*/]) {
     from file('src\\main\\html')
     into pagesDir
 }
