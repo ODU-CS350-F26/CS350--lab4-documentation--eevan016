@@ -1,6 +1,6 @@
 # Project Reports
 
-Ethan Evans
+Your Name
 
-* [Tests](./reports/tests/test/index.html)
-* [JavaDoc](./reports/javadoc/)
+* [Tests](./tests/test/)
+* [JavaDoc](./javadoc/)
