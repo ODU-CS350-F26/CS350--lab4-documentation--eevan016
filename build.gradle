@@ -59,8 +59,13 @@ task workTree(type: Exec, dependsOn: ['workTreeCheckout']) {
     commandLine = ['git', 'pull']
 }
 
-task copyReports (type: Copy, dependsOn: ['reports', 'workTree']) {
-    from 'build\\reports'
+task copyJavaDocs (type: Copy, dependsOn: ['reports', 'workTree']) {
+    from 'build\\reports\\javaDoc'
+    into pagesDir
+}
+
+task copyUnitTests (type: Copy, dependsOn: ['reports', 'workTree']) {
+    from 'build\\reports\\javaDoc'
     into pagesDir
 }
 
@@ -69,7 +74,7 @@ task copyReadMe (type: Copy, dependsOn: ['workTree']) {
     into pagesDir
 }
 
-task copyWebsite (type: Copy, dependsOn: ['copyReports', 'copyReadMe']) {
+task copyWebsite (type: Copy, dependsOn: ['copyJavaDocs', 'copyReadMe', 'copyUnitTests']) {
     from file('src\\main\\html')
     into pagesDir
 }
